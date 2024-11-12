@@ -1,0 +1,52 @@
+[gd_scene load_steps=9 format=3 uid="uid://sjnds611sod2"]
+
+[ext_resource type="Texture2D" uid="uid://cm83wgisqbuk5" path="res://assets/graphics/body.png" id="1_7lp72"]
+[ext_resource type="Texture2D" uid="uid://d0m42i4mf7mup" path="res://assets/graphics/head.png" id="1_lnjt5"]
+[ext_resource type="Texture2D" uid="uid://ba7vfvu08xmup" path="res://assets/graphics/outline.png" id="1_tqon1"]
+[ext_resource type="Texture2D" uid="uid://cu4unmf4habag" path="res://assets/graphics/glasses.png" id="2_q1ijr"]
+[ext_resource type="Texture2D" uid="uid://dxwv8xqnsweue" path="res://assets/graphics/ears.png" id="3_hs1ia"]
+[ext_resource type="Texture2D" uid="uid://hm470a6og813" path="res://assets/graphics/cat_mouth.png" id="4_y7ory"]
+[ext_resource type="Texture2D" uid="uid://bbleoe1ycsexw" path="res://assets/graphics/small_eye.png" id="6_8ju20"]
+[ext_resource type="Texture2D" uid="uid://oxfrpe3nxvsv" path="res://assets/graphics/hair.png" id="7_o6cj0"]
+
+[node name="Me" type="Node2D"]
+
+[node name="Camera2D" type="Camera2D" parent="."]
+
+[node name="Outline" type="Sprite2D" parent="."]
+texture = ExtResource("1_tqon1")
+
+[node name="Avatar" type="Node2D" parent="."]
+
+[node name="Body" type="Sprite2D" parent="Avatar"]
+texture = ExtResource("1_7lp72")
+
+[node name="Head" type="Sprite2D" parent="Avatar"]
+texture = ExtResource("1_lnjt5")
+
+[node name="Ears" type="Sprite2D" parent="Avatar/Head"]
+show_behind_parent = true
+position = Vector2(0, -4)
+texture = ExtResource("3_hs1ia")
+offset = Vector2(0, 4)
+
+[node name="Glasses" type="Sprite2D" parent="Avatar/Head"]
+position = Vector2(0, -10)
+texture = ExtResource("2_q1ijr")
+offset = Vector2(0, 10)
+
+[node name="LeftEye" type="Sprite2D" parent="Avatar/Head"]
+position = Vector2(-8, -11)
+texture = ExtResource("6_8ju20")
+
+[node name="RightEye" type="Sprite2D" parent="Avatar/Head"]
+position = Vector2(8, -11)
+texture = ExtResource("6_8ju20")
+flip_h = true
+
+[node name="Mouth" type="Sprite2D" parent="Avatar/Head"]
+position = Vector2(0, 1)
+texture = ExtResource("4_y7ory")
+
+[node name="Hair" type="Sprite2D" parent="Avatar/Head"]
+texture = ExtResource("7_o6cj0")
