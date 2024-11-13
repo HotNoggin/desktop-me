@@ -22,5 +22,5 @@ func _process(_delta: float) -> void:
 func _on_timer_timeout() -> void:
 	# Hacky reset to avoid a bug where the mic starts to delay over time
 	stream_player.playing = false
-	await get_tree().create_timer(1.0).timeout
+	await get_tree().create_timer(0.2).timeout
 	stream_player.playing = true
