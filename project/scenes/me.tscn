@@ -1,13 +1,17 @@
-[gd_scene load_steps=9 format=3 uid="uid://sjnds611sod2"]
+[gd_scene load_steps=12 format=3 uid="uid://sjnds611sod2"]
 
 [ext_resource type="Texture2D" uid="uid://cm83wgisqbuk5" path="res://assets/graphics/body.png" id="1_7lp72"]
 [ext_resource type="Texture2D" uid="uid://d0m42i4mf7mup" path="res://assets/graphics/head.png" id="1_lnjt5"]
 [ext_resource type="Texture2D" uid="uid://ba7vfvu08xmup" path="res://assets/graphics/outline.png" id="1_tqon1"]
+[ext_resource type="Script" path="res://scripts/volume_input.gd" id="2_3uecq"]
 [ext_resource type="Texture2D" uid="uid://cu4unmf4habag" path="res://assets/graphics/glasses.png" id="2_q1ijr"]
 [ext_resource type="Texture2D" uid="uid://dxwv8xqnsweue" path="res://assets/graphics/ears.png" id="3_hs1ia"]
 [ext_resource type="Texture2D" uid="uid://hm470a6og813" path="res://assets/graphics/cat_mouth.png" id="4_y7ory"]
 [ext_resource type="Texture2D" uid="uid://bbleoe1ycsexw" path="res://assets/graphics/small_eye.png" id="6_8ju20"]
 [ext_resource type="Texture2D" uid="uid://oxfrpe3nxvsv" path="res://assets/graphics/hair.png" id="7_o6cj0"]
+[ext_resource type="Script" path="res://scripts/mouse_look.gd" id="8_xdka4"]
+
+[sub_resource type="AudioStreamMicrophone" id="AudioStreamMicrophone_12ep5"]
 
 [node name="Me" type="Node2D"]
 
@@ -17,6 +21,21 @@
 texture = ExtResource("1_tqon1")
 
 [node name="Avatar" type="Node2D" parent="."]
+position = Vector2(0, 1)
+
+[node name="VolumeInput" type="Node" parent="Avatar" node_paths=PackedStringArray("stream_player", "timer")]
+script = ExtResource("2_3uecq")
+stream_player = NodePath("MicInput")
+timer = NodePath("MicResetTimer")
+
+[node name="MicInput" type="AudioStreamPlayer" parent="Avatar/VolumeInput"]
+stream = SubResource("AudioStreamMicrophone_12ep5")
+autoplay = true
+bus = &"Mic Input"
+
+[node name="MicResetTimer" type="Timer" parent="Avatar/VolumeInput"]
+wait_time = 5.0
+autostart = true
 
 [node name="Body" type="Sprite2D" parent="Avatar"]
 texture = ExtResource("1_7lp72")
@@ -30,23 +49,41 @@ position = Vector2(0, -4)
 texture = ExtResource("3_hs1ia")
 offset = Vector2(0, 4)
 
+[node name="Hair" type="Sprite2D" parent="Avatar/Head"]
+texture = ExtResource("7_o6cj0")
+
 [node name="Glasses" type="Sprite2D" parent="Avatar/Head"]
 position = Vector2(0, -10)
 texture = ExtResource("2_q1ijr")
 offset = Vector2(0, 10)
 
+[node name="MouseLook" type="Node" parent="Avatar/Head/Glasses"]
+script = ExtResource("8_xdka4")
+max_distance = 1.0
+
 [node name="LeftEye" type="Sprite2D" parent="Avatar/Head"]
 position = Vector2(-8, -11)
 texture = ExtResource("6_8ju20")
+
+[node name="MouseLook" type="Node" parent="Avatar/Head/LeftEye"]
+script = ExtResource("8_xdka4")
 
 [node name="RightEye" type="Sprite2D" parent="Avatar/Head"]
 position = Vector2(8, -11)
 texture = ExtResource("6_8ju20")
 flip_h = true
 
+[node name="MouseLook" type="Node" parent="Avatar/Head/RightEye"]
+script = ExtResource("8_xdka4")
+
 [node name="Mouth" type="Sprite2D" parent="Avatar/Head"]
 position = Vector2(0, 1)
 texture = ExtResource("4_y7ory")
 
-[node name="Hair" type="Sprite2D" parent="Avatar/Head"]
-texture = ExtResource("7_o6cj0")
+[node name="MouseLook" type="Node" parent="Avatar/Head/Mouth"]
+script = ExtResource("8_xdka4")
+max_distance = 1.0
+
+[node name="MouseLook" type="Node" parent="Avatar"]
+script = ExtResource("8_xdka4")
+max_distance = 1.0
