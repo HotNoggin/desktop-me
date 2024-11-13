@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://sjnds611sod2"]
+[gd_scene load_steps=13 format=3 uid="uid://sjnds611sod2"]
 
 [ext_resource type="Texture2D" uid="uid://cm83wgisqbuk5" path="res://assets/graphics/body.png" id="1_7lp72"]
 [ext_resource type="Texture2D" uid="uid://d0m42i4mf7mup" path="res://assets/graphics/head.png" id="1_lnjt5"]
@@ -10,6 +10,7 @@
 [ext_resource type="Texture2D" uid="uid://bbleoe1ycsexw" path="res://assets/graphics/small_eye.png" id="6_8ju20"]
 [ext_resource type="Texture2D" uid="uid://oxfrpe3nxvsv" path="res://assets/graphics/hair.png" id="7_o6cj0"]
 [ext_resource type="Script" path="res://scripts/mouse_look.gd" id="8_xdka4"]
+[ext_resource type="Script" path="res://scripts/volume_bounce.gd" id="11_de34h"]
 
 [sub_resource type="AudioStreamMicrophone" id="AudioStreamMicrophone_12ep5"]
 
@@ -22,20 +23,6 @@ texture = ExtResource("1_tqon1")
 
 [node name="Avatar" type="Node2D" parent="."]
 position = Vector2(0, 1)
-
-[node name="VolumeInput" type="Node" parent="Avatar" node_paths=PackedStringArray("stream_player", "timer")]
-script = ExtResource("2_3uecq")
-stream_player = NodePath("MicInput")
-timer = NodePath("MicResetTimer")
-
-[node name="MicInput" type="AudioStreamPlayer" parent="Avatar/VolumeInput"]
-stream = SubResource("AudioStreamMicrophone_12ep5")
-autoplay = true
-bus = &"Mic Input"
-
-[node name="MicResetTimer" type="Timer" parent="Avatar/VolumeInput"]
-wait_time = 5.0
-autostart = true
 
 [node name="Body" type="Sprite2D" parent="Avatar"]
 texture = ExtResource("1_7lp72")
@@ -87,3 +74,24 @@ max_distance = 1.0
 [node name="MouseLook" type="Node" parent="Avatar"]
 script = ExtResource("8_xdka4")
 max_distance = 1.0
+
+[node name="VolumeBounce" type="Node" parent="Avatar/MouseLook" node_paths=PackedStringArray("input", "target")]
+script = ExtResource("11_de34h")
+input = NodePath("VolumeInput")
+target = NodePath("..")
+intensity = 30.0
+offset = Vector2(0, 1)
+
+[node name="VolumeInput" type="Node" parent="Avatar/MouseLook/VolumeBounce" node_paths=PackedStringArray("stream_player", "timer")]
+script = ExtResource("2_3uecq")
+stream_player = NodePath("MicInput")
+timer = NodePath("MicResetTimer")
+
+[node name="MicInput" type="AudioStreamPlayer" parent="Avatar/MouseLook/VolumeBounce/VolumeInput"]
+stream = SubResource("AudioStreamMicrophone_12ep5")
+autoplay = true
+bus = &"Mic Input"
+
+[node name="MicResetTimer" type="Timer" parent="Avatar/MouseLook/VolumeBounce/VolumeInput"]
+wait_time = 5.0
+autostart = true
