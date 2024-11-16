@@ -4,3 +4,4 @@
 
 [node name="WindowPositioner" type="Node"]
 script = ExtResource("1_i03qa")
+offset = Vector2i(425, 0)
