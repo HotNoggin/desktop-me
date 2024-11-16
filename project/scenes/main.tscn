@@ -1,0 +1,10 @@
+[gd_scene load_steps=2 format=3 uid="uid://chp4v8aj5j6bc"]
+
+[ext_resource type="PackedScene" uid="uid://sjnds611sod2" path="res://scenes/me.tscn" id="1_y8otk"]
+
+[node name="Main" type="Node2D"]
+
+[node name="Camera2D" type="Camera2D" parent="."]
+
+[node name="Me" parent="." instance=ExtResource("1_y8otk")]
+ear_height = null

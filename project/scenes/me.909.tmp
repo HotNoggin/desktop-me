@@ -5,8 +5,8 @@
 [ext_resource type="Script" path="res://scenes/me.gd" id="1_npywf"]
 [ext_resource type="Texture2D" uid="uid://ba7vfvu08xmup" path="res://assets/graphics/outline.png" id="1_tqon1"]
 [ext_resource type="Script" path="res://scripts/volume_input.gd" id="2_3uecq"]
-[ext_resource type="Resource" uid="uid://bnr4jwhmoqs06" path="res://saves/base.tres" id="2_ngbeu"]
 [ext_resource type="Texture2D" uid="uid://cu4unmf4habag" path="res://assets/graphics/glasses.png" id="2_q1ijr"]
+[ext_resource type="Resource" uid="uid://bnr4jwhmoqs06" path="res://saves/base.tres" id="2_q5677"]
 [ext_resource type="Texture2D" uid="uid://dxwv8xqnsweue" path="res://assets/graphics/ears.png" id="3_hs1ia"]
 [ext_resource type="Texture2D" uid="uid://hm470a6og813" path="res://assets/graphics/cat_mouth.png" id="4_y7ory"]
 [ext_resource type="Texture2D" uid="uid://bbleoe1ycsexw" path="res://assets/graphics/small_eye.png" id="6_8ju20"]
@@ -24,7 +24,10 @@ metadata/_snap_enabled = true
 
 [node name="Me" type="Node2D"]
 script = ExtResource("1_npywf")
-textures = ExtResource("2_ngbeu")
+textures = ExtResource("2_q5677")
+eye_height = 14.0
+eye_width = 10.2
+mouth_height = 3.5
 
 [node name="MouseDuck" type="Node" parent="."]
 script = ExtResource("13_4wr1g")
@@ -50,7 +53,9 @@ texture = ExtResource("1_lnjt5")
 [node name="Ears" type="Sprite2D" parent="Avatar/Head"]
 unique_name_in_owner = true
 show_behind_parent = true
+position = Vector2(0, -4)
 texture = ExtResource("3_hs1ia")
+offset = Vector2(0, 4)
 
 [node name="Hair" type="Sprite2D" parent="Avatar/Head"]
 unique_name_in_owner = true
@@ -68,7 +73,7 @@ max_distance = 1.0
 
 [node name="LeftEye" type="Sprite2D" parent="Avatar/Head"]
 unique_name_in_owner = true
-position = Vector2(-8, -11)
+position = Vector2(-10.2, 14)
 texture = ExtResource("6_8ju20")
 
 [node name="MouseLook" type="Node" parent="Avatar/Head/LeftEye"]
@@ -76,7 +81,7 @@ script = ExtResource("8_xdka4")
 
 [node name="RightEye" type="Sprite2D" parent="Avatar/Head"]
 unique_name_in_owner = true
-position = Vector2(8, -11)
+position = Vector2(10.2, 14)
 texture = ExtResource("6_8ju20")
 flip_h = true
 
@@ -85,7 +90,7 @@ script = ExtResource("8_xdka4")
 
 [node name="Mouth" type="Sprite2D" parent="Avatar/Head"]
 unique_name_in_owner = true
-position = Vector2(0, 1)
+position = Vector2(0, 3.5)
 texture = ExtResource("4_y7ory")
 
 [node name="MouseLook" type="Node" parent="Avatar/Head/Mouth"]
