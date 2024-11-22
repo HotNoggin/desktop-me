@@ -10,4 +10,4 @@ extends Node
 func _process(_delta: float) -> void:
 	target.offset.y = -input.current_volume * intensity
 	target.offset += offset
-	print(input.current_volume)
+	#print(input.current_volume)
