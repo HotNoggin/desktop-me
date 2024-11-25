@@ -37,11 +37,16 @@ unique_name_in_owner = true
 texture = ExtResource("1_tqon1")
 
 [node name="Avatar" type="Node2D" parent="."]
-position = Vector2(0, 1)
+position = Vector2(0, 2)
 
 [node name="Body" type="Sprite2D" parent="Avatar"]
 unique_name_in_owner = true
 texture = ExtResource("1_7lp72")
+
+[node name="Body2" type="Sprite2D" parent="Avatar/Body"]
+position = Vector2(0, 64)
+texture = ExtResource("1_7lp72")
+flip_v = true
 
 [node name="Head" type="Sprite2D" parent="Avatar"]
 unique_name_in_owner = true
